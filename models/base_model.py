@@ -1,15 +1,27 @@
 #!/usr/bin/python3
+"""Entry point for BaseModel"""
 import uuid
 from datetime import datetime
 from copy import deepcopy
 
 
 class BaseModel:
-    '''
-    NOTE: instances of `BaseModel` autoupdate `updated_at` after
-          any change through an overriden `__setattr__` method.
-    '''
+    """Class for BaseModel.
+
+    Instances of `BaseModel` autoupdate `updated_at` after
+    any change through an overriden `__setattr__` method.
+
+    """
+
     def __init__(self, *args, **kwargs):
+        """Instantiation for BaseModel.
+
+        Args:
+            *args: arguments.
+            **kwargs: keyworded arguments.
+
+        """
+
         # TODO make time_attrs class attribute?
         time_attrs = ('created_at', 'updated_at')
         if kwargs:
@@ -26,17 +38,35 @@ class BaseModel:
                 setattr(self, a, current_time)
 
     def __str__(self):
+        """Magic method for `__str__`
+
+        Format: [<class name>] (<self.id>) <self.__dict__>
+
+        """
+
         args = __class__.__name__, self.id, self.__dict__
         return "[{}] ({}) <{}>".format(*args)
 
     def save(self):
+        """Updates the public instance attr `updated_at`
+        with the current datetime.
+
+        """
+
         super().__setattr__('updated_at', datetime.now())
 
     def __setattr__(self, name, value):
+        """Magic method for `__setattr__`"""
+
         self.save()
         super().__setattr__(name, value)
 
     def to_dict(self):  # TODO make time_attrs class attribute?
+        """Returns a dictionary containing all keys/values of __dict__
+        of the instance.
+
+        """
+
         time_attrs = ('created_at', 'updated_at')
         d = deepcopy(self.__dict__)
         d['__class__'] = __class__.__name__
