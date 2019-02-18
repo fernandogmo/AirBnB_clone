@@ -3,6 +3,7 @@
 import uuid
 from datetime import datetime
 from copy import deepcopy
+from models import storage
 
 
 class BaseModel:
