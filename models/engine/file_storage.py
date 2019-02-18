@@ -41,4 +41,9 @@ class FileStorage():
         """
 
         classes = {"BaseModel": BaseModel}
-        pass
+
+        try:
+            with open(self.__file_path, "r", encoding="utf-8") as r_file:
+                temp = json.load(r_file)
+        except:
+            pass

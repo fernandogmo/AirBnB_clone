@@ -9,7 +9,7 @@ class BaseModel:
     NOTE: instances of `BaseModel` autoupdate `updated_at` after
           any change through an overriden `__setattr__` method.
     '''
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         current_time = datetime.now()
         super().__setattr__('id', str(uuid.uuid4()))
         super().__setattr__('created_at', current_time)
