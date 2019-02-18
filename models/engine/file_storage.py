@@ -4,8 +4,7 @@
 import json
 from models.base_model import BaseModel
 
-
-class FileStorage:
+class FileStorage():
     """FileStorage manages instances
     """
 
@@ -29,7 +28,13 @@ class FileStorage:
         """Serializes __objects into the JSON file
         """
 
-        pass
+        temp = {}
+
+        for k, v in self.__objects.items():
+            temp[k] = v.to_dict()
+
+        with open(self.__file_path, "w", encoding="utf-8") as w_file:
+            w_file.write(json.dumps(temp))
 
     def reload(self):
         """Deserializes the JSON file if exists, otherwise do nothing
