@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import uuid
-import datetime as dt
+from datetime import datetime
+from copy import deepcopy
 
 
 class BaseModel:
@@ -9,8 +10,8 @@ class BaseModel:
           any change through an overriden `__setattr__` method.
     '''
     def __init__(self):
-        current_time = dt.datetime.now()
-        self.id = str(uuid.uuid4())
+        current_time = datetime.now()
+        super().__setattr__('id', str(uuid.uuid4()))
         super().__setattr__('created_at', current_time)
         super().__setattr__('updated_at', current_time)
 
@@ -19,18 +20,19 @@ class BaseModel:
         return "[{}] ({}) <{}>".format(*args)
 
     def save(self):
-        super().__setattr__('updated_at', dt.datetime.now())
+        super().__setattr__('updated_at', datetime.now())
 
     def __setattr__(self, name, value):
         super().__setattr__(name, value)
         self.save()
 
     def to_dict(self):
-        d = self.__dict__
+        d = deepcopy(self.__dict__)
         d['__class__'] = __class__.__name__
         d['created_at'] = d['created_at'].isoformat()
         d['updated_at'] = d['updated_at'].isoformat()
         return d
+
 
 
 if __name__ == '__main__':
