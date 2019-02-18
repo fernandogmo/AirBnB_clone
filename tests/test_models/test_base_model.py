@@ -3,7 +3,7 @@ import unittest
 # import pep8
 # import inspect  # TODO use like in past proj
 from datetime import datetime as dt
-from models.base_mode import BaseModel
+from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
