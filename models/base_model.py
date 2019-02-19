@@ -3,7 +3,7 @@
 import uuid
 from datetime import datetime
 from copy import deepcopy
-
+import models
 
 class BaseModel:
     """Class for BaseModel.
@@ -26,8 +26,10 @@ class BaseModel:
         time_attrs = ('created_at', 'updated_at')
         if kwargs:
             for k, v in kwargs.items():
+                if k == "__class__":
+                    continue
                 if k in time_attrs:  # set time attributes from isoformat strs
-                    time_val = datetime.fromisoformat(v)
+                    time_val = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
                     setattr(self, k, time_val)
                 else:
                     setattr(self, k, v)
@@ -36,6 +38,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             for a in time_attrs:
                 setattr(self, a, current_time)
+            models.storage.new(self)
 
     def __str__(self):
         """Magic method for `__str__`
@@ -54,12 +57,15 @@ class BaseModel:
         """
 
         super().__setattr__('updated_at', datetime.now())
+        models.storage.save()
 
+    '''
     def __setattr__(self, name, value):
         """Magic method for `__setattr__`"""
 
         self.save()
         super().__setattr__(name, value)
+    '''
 
     def to_dict(self):  # TODO make time_attrs class attribute?
         """Returns a dictionary containing all keys/values of __dict__
@@ -74,7 +80,6 @@ class BaseModel:
             if k in time_attrs:  # set time attributes to isoformat strs
                 d[k] = v.isoformat()
         return d
-
 
 if __name__ == '__main__':
     m = BaseModel()
