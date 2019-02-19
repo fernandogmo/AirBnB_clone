@@ -28,7 +28,7 @@ class BaseModel:
         if kwargs:
             for k, v in kwargs.items():
                 if k in time_attrs:  # set time attributes from isoformat strs
-                    time_val = dt.fromisoformat(v)
+                    time_val = datetime.fromisoformat(v)
                     setattr(self, k, time_val)
                 else:
                     setattr(self, k, v)
