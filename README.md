@@ -40,31 +40,31 @@ To update an instance based on the class name and `id` by adding or updating att
 ## Repository Contents :file_folder:
 
 * [console.py](./console.py)
-A custom command interpreter with commands to interact with the objects and storage management.
+  - A custom command interpreter with commands to interact with the objects and storage management.
 
 * [base_model.py](./models/base_model.py)
-This is the base class for all other classes that inherits from this, it gets created via console command `create`.
+  - This is the base class for all other classes that inherits from this, it gets created via console command `create`.
 
 * [file_storage.py](./models/engine/file_storage.py)
-Manages all of the instances when called via console commands.
+  - Manages all of the instances when called via console commands.
 
 * [user.py](./models/user.py)
-Inherits from BaseModel to create user's `email`, `password`, `first_name`, and `last_name`
+  - Inherits from BaseModel to create user's `email`, `password`, `first_name`, and `last_name`
 
 * [state.py](./models/state.py)
-Inherits from BaseModel to create state's `name`
+  - Inherits from BaseModel to create state's `name`
 
 * [city.py](./models/city.py)
-Inherits from BaseModel to create city's `state_id`, and `name`
+  - Inherits from BaseModel to create city's `state_id`, and `name`
 
 * [amenity.py](./models/amenity.py)
-Inherits from BaseModel to create amenity's `name`
+  - Inherits from BaseModel to create amenity's `name`
 
 * [place.py](./models/place.py)
-Inherits from BaseModel to create place's `city_id`, `user_id`, `name`, `description`, `number_rooms`, `number_bathrooms`, `max_guest`, `price_by_night`, `latitude`, `longitude`, and `amenity_ids`
+  - Inherits from BaseModel to create place's `city_id`, `user_id`, `name`, `description`, `number_rooms`, `number_bathrooms`, `max_guest`, `price_by_night`, `latitude`, `longitude`, and `amenity_ids`
 
 * [review.py](./models/review.py)
-Inherits from BaseModel to create review's `place_id`, `user_id`, and `text`
+  - Inherits from BaseModel to create review's `place_id`, `user_id`, and `text`
 
 ---
 
