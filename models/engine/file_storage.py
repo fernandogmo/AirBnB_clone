@@ -1,32 +1,27 @@
 #!/usr/bin/python3
-"""FileStorage class
-"""
+"""FileStorage class"""
 import json
 from models.base_model import BaseModel
 
-class FileStorage():
-    """FileStorage manages instances
-    """
+class FileStorage:
+    """FileStorage manages instances."""
 
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        """Returns the dictionary __objects
-        """
+        """Returns the dictionary `__objects`."""
 
         return self.__objects
 
     def new(self, obj):
-        """Sets obj in __objects with format {}.{}
-        """
+        """Sets obj in __objects with format `<class name>.id`."""
 
         obj_key = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[obj_key] = obj
 
     def save(self):
-        """Serializes __objects into the JSON file
-        """
+        """Serializes __objects into the JSON file."""
 
         temp = {}
 
@@ -37,30 +32,12 @@ class FileStorage():
             w_file.write(json.dumps(temp))
 
     def reload(self):
-        """Deserializes the JSON file if exists, otherwise do nothing
-        """
+        """Deserializes the JSON file if exists, otherwise do nothing."""
 
         classes = {"BaseModel": BaseModel}
 
         try:
             with open(self.__file_path, "r", encoding="utf-8") as r_file:
                 temp = json.load(r_file)
-        except:
+        except FileNotFoundError:
             pass
-
-if __name__ == '__main__':
-    from models import storage
-    from models.base_model import BaseModel
-
-    all_objs = storage.all()
-    print("-- Reloaded objects --")
-    for obj_id in all_objs.keys():
-        obj = all_objs[obj_id]
-        print(obj)
-
-    print("-- Create a new object --")
-    my_model = BaseModel()
-    my_model.name = "Holberton"
-    my_model.my_number = 89
-    my_model.save()
-    print(my_model)
