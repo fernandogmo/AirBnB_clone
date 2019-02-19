@@ -3,6 +3,7 @@
 import json
 from models.base_model import BaseModel
 
+
 class FileStorage:
     """FileStorage manages instances."""
 
@@ -39,5 +40,8 @@ class FileStorage:
         try:
             with open(self.__file_path, "r", encoding="utf-8") as r_file:
                 temp = json.load(r_file)
+                for k, v in temp.items():
+                    temp_v = classes[v["__class__"]](**v)
+                    self.__objects[k] = temp_v
         except FileNotFoundError:
             pass
