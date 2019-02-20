@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import cmd
 import sys
-import os  # TODO how are we using this?
 import models
 import shlex
 
@@ -57,6 +56,8 @@ class HBNBCommand(cmd.Cmd):
             if instance in store.keys():
                 del store[instance]
                 models.storage.save()
+            else:
+                print("** no instance found **")
 
     def do_update(self, args):
         """Updates an instance based on the class name and id."""
@@ -97,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
-    def do_help(self):
+    def help_help(self):
         pass
 
     def do_quit(self, args):
