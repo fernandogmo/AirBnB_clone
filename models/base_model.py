@@ -5,6 +5,7 @@ from datetime import datetime
 from copy import deepcopy
 import models
 
+
 class BaseModel:
     """Class for BaseModel.
 
@@ -21,7 +22,6 @@ class BaseModel:
             **kwargs: keyworded arguments.
 
         """
-
         # TODO make time_attrs class attribute?
         time_attrs = ('created_at', 'updated_at')
         if kwargs:
@@ -46,8 +46,7 @@ class BaseModel:
         Format: [<class name>] (<self.id>) <self.__dict__>
 
         """
-
-        args = __class__.__name__, self.id, self.__dict__
+        args = self.__class__.__name__, self.id, self.__dict__
         return "[{}] ({}) <{}>".format(*args)
 
     def save(self):
@@ -55,7 +54,6 @@ class BaseModel:
         with the current datetime.
 
         """
-
         super().__setattr__('updated_at', datetime.now())
         models.storage.save()
 
@@ -72,7 +70,6 @@ class BaseModel:
         of the instance.
 
         """
-
         time_attrs = ('created_at', 'updated_at')
         d = deepcopy(self.__dict__)
         d['__class__'] = __class__.__name__
@@ -80,6 +77,7 @@ class BaseModel:
             if k in time_attrs:  # set time attributes to isoformat strs
                 d[k] = v.isoformat()
         return d
+
 
 if __name__ == '__main__':
     m = BaseModel()
