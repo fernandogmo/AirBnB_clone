@@ -13,6 +13,8 @@ class BaseModel:
     any change through an overriden `__setattr__` method.
 
     """
+    __str_fmt = "[{}] ({}) {}"
+
     def __init__(self, *args, **kwargs):
         """Instantiation for BaseModel.
 
@@ -44,8 +46,9 @@ class BaseModel:
         Format: [<class name>] (<self.id>) <self.__dict__>
 
         """
-        args = self.__class__.__name__, self.id, self.__dict__
-        return "[{}] ({}) <{}>".format(*args)
+        return BaseModel.__str_fmt.format(self.__class__.__name__,
+                                          self.id, self.__dict__)
+        # return "[{}] ({}) {}".format(*args)
 
     def save(self):
         """Updates the public instance attr `updated_at`

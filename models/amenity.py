@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Entry point for Amenity"""
 from models.base_model import BaseModel
 
 
