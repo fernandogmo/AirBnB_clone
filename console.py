@@ -57,6 +57,8 @@ class HBNBCommand(cmd.Cmd):
             if instance in store.keys():
                 del store[instance]
                 models.storage.save()
+            else:
+                print("** no instance found **")
 
     def do_update(self, args):
         """Updates an instance based on the class name and id."""
