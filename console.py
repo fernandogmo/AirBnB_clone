@@ -6,6 +6,7 @@ import shlex
 
 
 class HBNBCommand(cmd.Cmd):
+    """Custom command interpreter"""
     prompt = '(hbnb) '
     file = None
 
@@ -19,7 +20,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif args[0] in models.classes:
             instance = models.classes[args[0]]()
-            instance.save()
+            models.storage.save()
             print(instance.id)
         else:
             print("** class doesn't exist **")
