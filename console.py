@@ -3,6 +3,7 @@ import cmd
 import sys
 import os  # TODO how are we using this?
 import models
+import shlex
 
 
 class HBNBCommand(cmd.Cmd):
@@ -108,10 +109,9 @@ class HBNBCommand(cmd.Cmd):
         pass
 
 
-def parse(args):
+def parse(line):
     """Convert a series of zero or more numbers to an argument list."""
-    # return tuple(map(int, args.split()))
-    return args.split()
+    return shlex.split(line)
 
 
 if __name__ == '__main__':
