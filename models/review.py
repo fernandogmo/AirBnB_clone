@@ -21,6 +21,6 @@ class Review(BaseModel):
         * Update your command interpreter (console.py)
         to allow show, create, destroy, update and all used with User.
     """
-    place_id: str = ""
-    user_id: str = ""
-    text: str = ""
+    place_id = ""
+    user_id = ""
+    text = ""
