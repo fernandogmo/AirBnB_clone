@@ -13,14 +13,12 @@ class BaseModel:
     any change through an overriden `__setattr__` method.
 
     """
-
     def __init__(self, *args, **kwargs):
         """Instantiation for BaseModel.
 
         Args:
             *args: arguments.
             **kwargs: keyworded arguments.
-
         """
         # TODO make time_attrs class attribute?
         time_attrs = ('created_at', 'updated_at')

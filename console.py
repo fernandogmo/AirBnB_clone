@@ -73,10 +73,12 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in models.classes:
             print("** class doesn't exist **")
         else:
-            store= models.storage.all()
-            instance = args[0] + '.' + args[1]
+            cls_name, objID, attr_name, attr_val = tuple(args)
+            store = models.storage.all()
+            instance = cls_name + '.' + objID
             if instance in store.keys():
-                setattr(store[instance], args[2], args[3])  # TODO cast val properly
+                setattr(store[instance], attr_name,
+                        type(getattr(store[instance], attr_name))(attr_val))
                 models.storage.save()
             else:
                 print("** no instance found **")
