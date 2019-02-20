@@ -2,6 +2,7 @@
 import cmd
 import sys
 import models
+import shlex
 
 
 class HBNBCommand(cmd.Cmd):
@@ -107,11 +108,14 @@ class HBNBCommand(cmd.Cmd):
         """Called when empty line is entered in prompt."""
         pass
 
+    def do_json(self):
+        """Prints the contents of `file.json`"""
+        print(models.storage.all())
 
-def parse(args):
+
+def parse(line):
     """Convert a series of zero or more numbers to an argument list."""
-    # return tuple(map(int, args.split()))
-    return args.split()
+    return shlex.split(line)
 
 
 if __name__ == '__main__':
