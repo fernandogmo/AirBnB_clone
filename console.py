@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 import cmd
 import sys
-import os  # TODO how are we using this?
 import models
 
 
 class HBNBCommand(cmd.Cmd):
+    """Custom command interpreter"""
     prompt = '(hbnb) '
     file = None
 
@@ -71,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in models.classes:
             print("** class doesn't exist **")
         else:
-            store= models.storage.all()
+            store = models.storage.all()
             instance = args[0] + '.' + args[1]
             if instance in store.keys():
                 setattr(store[instance], args[2], args[3])  # TODO cast val properly

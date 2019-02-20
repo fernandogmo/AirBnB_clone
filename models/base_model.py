@@ -47,7 +47,7 @@ class BaseModel:
 
         """
 
-        args = __class__.__name__, self.id, self.__dict__
+        args = self.__class__.__name__, self.id, self.__dict__
         return "[{}] ({}) <{}>".format(*args)
 
     def save(self):
