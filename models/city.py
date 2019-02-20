@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Entry point for City"""
 from models.base_model import BaseModel
 
 
