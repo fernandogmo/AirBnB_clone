@@ -73,7 +73,7 @@ class BaseModel:
         """
         time_attrs = ('created_at', 'updated_at')
         d = deepcopy(self.__dict__)
-        d['__class__'] = __class__.__name__
+        d['__class__'] = self.__class__.__name__
         for k, v in d.items():
             if k in time_attrs:  # set time attributes to isoformat strs
                 d[k] = v.isoformat()

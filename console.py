@@ -20,7 +20,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif args[0] in models.classes:
             instance = models.classes[args[0]]()
-            instance.save()
+            models.storage.save()
             print(instance.id)
         else:
             print("** class doesn't exist **")
@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
-    def do_help(self):
+    def help_help(self):
         pass
 
     def do_quit(self, args):
