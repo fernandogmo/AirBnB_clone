@@ -108,7 +108,7 @@ To update an instance based on the class name and `id` by adding or updating att
 
 ## Example of the console's interactive mode
 
-![]()
+![interactive](https://i.imgur.com/qSuOplr.png)
 
 ## Example of the console's non-interactive mode
 
