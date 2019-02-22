@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import cmd
-import sys
 import models
 import shlex
 
@@ -65,11 +64,11 @@ class HBNBCommand(cmd.Cmd):
         args = parse(args)
         if not args:
             print("** class name missing **")
-        elif len(args) < 1:
-            print("** instance id missing **")
         elif len(args) < 2:
-            print("** attribute name missing **")
+            print("** instance id missing **")
         elif len(args) < 3:
+            print("** attribute name missing **")
+        elif len(args) < 4:
             print("** value missing **")
         elif args[0] not in models.classes:
             print("** class doesn't exist **")
@@ -78,9 +77,16 @@ class HBNBCommand(cmd.Cmd):
             store = models.storage.all()
             instance = cls_name + '.' + objID
             if instance in store.keys():
-                setattr(store[instance], attr_name,
-                        type(getattr(store[instance], attr_name))(attr_val))
-                models.storage.save()
+                obj = store[instance]
+                try:
+                    setattr(obj, attr_name,
+                            type(getattr(obj, attr_name))(attr_val))
+                    models.storage.save()
+                except AttributeError:
+                    setattr(obj, attr_name, attr_val)
+                    models.storage.save()
+                except ValueError:
+                    print("** value is wrong type for attribute **")
             else:
                 print("** no instance found **")
 
