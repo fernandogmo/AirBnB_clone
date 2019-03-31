@@ -80,11 +80,11 @@ class HBNBCommand(cmd.Cmd):
                 obj = store[instance]
                 try:
                     setattr(obj, attr_name,
-                            type(getattr(obj, attr_name))(attr_val))
+                            type(getattr(obj, attr_name, ""))(attr_val))
                     models.storage.save()
-                except AttributeError:
-                    setattr(obj, attr_name, attr_val)
-                    models.storage.save()
+                # except AttributeError:dd
+                #     setattr(obj, attr_name, attr_val)
+                #     models.storage.save()
                 except ValueError:
                     print("** value is wrong type for attribute **")
             else:
